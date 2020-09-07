@@ -10,13 +10,73 @@ GENERAL
     box-sizing: border-box;
 }
 
+body {
+	background-color: #3F3040;
+}
 
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.container div {
+	margin-top: 50px;
+}
 
+.startGame {
+	margin: 0 auto;
+}
+
+.choices { 
+	display: flex;
+	justify-content: space-between;
+}
 /*=================
 FORMS
 ==================*/
+.start {
+	width: 100px;;
+}
+
+.choice {
+	width: 100px;
+}
+
+.results {
+	text-align: center;
+	height: 200px;
+}
+
+.results p {
+	color: #F2F2F2;
+	font-weight: bold;
+	font-size: 20px;
+	height: 40px;
+}
 
 
+
+#startGame {
+	background-color: #ff7940;
+	border: none;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+
+}
+
+.choice:hover, .start:hover {
+	transform: scale(1.1);			
+}
+
+.choice:active, .start:active {
+	transform: scale(1.1);
+	transform: translate(3px, 3px);
+}
 
 /*=================
 IMAGES

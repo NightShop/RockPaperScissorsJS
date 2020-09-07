@@ -54,15 +54,24 @@ function evaluator(playerChoice, computerSelection) {
 
 
 function playRound(e) {
+    if (document.querySelector(".results p")) {
+        const temp = document.querySelector("div.results");
+        const tempP = document.querySelector(".results > p")
+        console.log(tempP);
+        temp.removeChild(tempP);
+    }
+
+    const startButton = document.querySelector("#startGame");
     const computerSelection = computerPlay();
     const playerChoice = e.target.id;
     const evaluatedResults = evaluator(playerChoice, computerSelection);
     const resultsBox = document.querySelector("div.results");
     //console.log(resultsBox);
     const oneResult = document.createElement("p");
-    resultsBox.appendChild(oneResult);
+    const referenceNode = document.querySelector("div.results > div");
+    resultsBox.insertBefore(oneResult, referenceNode);
     oneResult.textContent = evaluatedResults[0];
-     if (evaluatedResults[1] === 1) {
+    if (evaluatedResults[1] === 1) {
         playerScore++;
     }
     else if (evaluatedResults[1] === 0) {
@@ -75,14 +84,45 @@ function playRound(e) {
     else if (evaluatedResults[1] === 3) {
         i--;
     }
-    console.log(`PLaye score: ${playerScore} Comp score: ${computerScore}`);
+
+
+    const playerBucket = document.querySelector("#playerScore");
+    const computerBucket = document.querySelector("#computerScore");
+
+    playerBucket.textContent = playerScore;
+    computerBucket.textContent = computerScore;
+
+    if (computerScore === playerScore === 5) {
+        oneResult.textContent = "The game is a tie! Another round?";
+        playerScore = 0;
+        computerScore = 0;
+        startButton.textContent = "PLAY AGAIN";
+
+    }
+    else if (computerScore === 5) {
+        oneResult.textContent = "You have lost against a random() :). That's a shame. Another round?";
+        playerScore = 0;
+        computerScore = 0;
+        startButton.textContent = "PLAY AGAIN";
+    }
+    else if (playerScore === 5) {
+        oneResult.textContent = "Congratz! You have won the game! Another round?";
+        playerScore = 0;
+        computerScore = 0;
+        startButton.textContent = "PLAY AGAIN";
+    }
+    console.log(`Player score: ${playerScore} Comp score: ${computerScore}`);
 }
 
 
 
 
-    const buttons = document.querySelectorAll('.choice');
-    buttons.forEach((button) => {
-        button.addEventListener("click", playRound)
-    });
+const buttons = document.querySelectorAll('.choice');
+buttons.forEach((button) => {
+    button.addEventListener("click", playRound)
+});
 
+function resetFunction() {
+    playerBucket.textContent = "";
+    computerBucket.textContent = "";
+}
